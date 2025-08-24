@@ -10,7 +10,7 @@ const AdminRouter_1 = __importDefault(require("./AdminRouter"));
 const ProfileRouter_1 = __importDefault(require("./ProfileRouter"));
 const AppRouter = (0, express_1.Router)();
 AppRouter.use('/auth', AuthRouter_1.default);
-AppRouter.use('/transactions', TransactionRouter_1.default);
+AppRouter.use('/transaction', TransactionRouter_1.default);
 AppRouter.use('/admin', AdminRouter_1.default);
 AppRouter.use('/profile', ProfileRouter_1.default);
 exports.default = AppRouter;

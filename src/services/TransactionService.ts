@@ -93,7 +93,21 @@ export class TransactionServiceFunctions extends UserService {
       try {
          const ids = Object.values(TransactionServiceFunctions.SYMBOL_TO_ID).join(",");
          const response = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`)
-         return { success: true, message: 'Crypto to USD rate fetched successfully', data: response.data }
+         const { data } = response
+         // reverse map: { bitcoin: "BTC", ethereum: "ETH", ... }
+         const idToSymbol: Record<string, string> = Object.entries(TransactionServiceFunctions.SYMBOL_TO_ID)
+            .reduce((acc, [symbol, id]) => {
+               acc[id] = symbol;
+               return acc;
+            }, {} as Record<string, string>);
+
+         // map response
+         const mapped = Object.entries(data).map(([id, priceObj]) => ({
+            symbol: idToSymbol[id] || id, // fallback to id if not found
+            id,
+            ...(typeof priceObj === 'object' && priceObj !== null ? priceObj : {})
+         }));
+         return { success: true, message: 'Crypto to USD rate fetched successfully', data: mapped }
       } catch (error) {
          throw new InternalServerError('Failed to fetch crypto to USD rate')
       }

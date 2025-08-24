@@ -7,7 +7,7 @@ import ProfileRouter from "./ProfileRouter";
 const AppRouter = Router()
 
 AppRouter.use('/auth', AuthRouter)
-AppRouter.use('/transactions', TransactionRouter)
+AppRouter.use('/transaction', TransactionRouter)
 AppRouter.use('/admin', AdminRouter)
 AppRouter.use('/profile', ProfileRouter)
 
