@@ -21,9 +21,13 @@ const CryptoBalanceSchema = new mongoose_1.default.Schema({
     SHIBA: { type: Number, default: 0 },
     PEPE: { type: Number, default: 0 },
     TROLL: { type: Number, default: 0 },
+}, {
+    _id: false
 });
 const WalletSchema = new mongoose_1.default.Schema({
     balances: { type: CryptoBalanceSchema, default: () => ({}) }
+}, {
+    _id: false
 });
 const UserSchema = new mongoose_1.default.Schema({
     firstName: { type: String, required: [true, 'first name is required!'] },

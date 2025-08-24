@@ -19,10 +19,14 @@ const CryptoBalanceSchema = new mongoose.Schema({
    SHIBA: { type: Number, default: 0 },
    PEPE: { type: Number, default: 0 },
    TROLL: { type: Number, default: 0 },
+}, {
+   _id: false
 })
 
 const WalletSchema = new mongoose.Schema<IWallet>({
    balances: { type: CryptoBalanceSchema, default: () => ({}) }
+}, {
+   _id: false
 })
 
 const UserSchema = new mongoose.Schema<IUser>({
