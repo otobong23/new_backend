@@ -8,17 +8,20 @@ const AdminValidator_1 = require("../validators/AdminValidator");
 const AuthValidator_1 = require("../validators/AuthValidator");
 const TransactionValidator_1 = require("../validators/TransactionValidator");
 const AdminRouter = (0, express_1.Router)();
+// Admin Routes
 AdminRouter.post('/login', (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.loginValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.adminLogin));
 AdminRouter.patch('/', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.updateAdminValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateAdmin));
 AdminRouter.get('/', (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getAdmin));
+// Users Routes
 AdminRouter.get('/total-users', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getTotalUsers));
 AdminRouter.get('/all-users', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getAllUsers));
 AdminRouter.get('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getUser));
-AdminRouter.get('/all-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getAllTransactions));
-AdminRouter.get('/user-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getUserTransactions));
 AdminRouter.patch('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.userValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateUser));
 AdminRouter.delete('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.deleteUser));
+AdminRouter.get('/all-users/search', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.searchUsers));
+// Transaction Routes
+AdminRouter.get('/all-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getAllTransactions));
 AdminRouter.patch('/all-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.updateTransactionValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateTransaction));
 AdminRouter.delete('/all-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.idValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.deleteTransaction));
-AdminRouter.get('/all-users/search', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.searchUsers));
+AdminRouter.get('/user-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getUserTransactions));
 exports.default = AdminRouter;

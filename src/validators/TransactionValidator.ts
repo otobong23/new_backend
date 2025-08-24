@@ -6,7 +6,7 @@ export const depositValidator = Joi.object({
    amount: Joi.number().positive().required(),
    image: Joi.string().uri().required(),
    description: Joi.string().min(3).max(250).required(),
-   blockchain: Joi.string().valid(Object.keys(BLOCKCHAIN_NETWORKS_SYMBOLS)).required(),
+   blockchain: Joi.string().valid(...Object.keys(BLOCKCHAIN_NETWORKS_SYMBOLS)).required(),
 })
 
 export const withdrawValidator = Joi.object({

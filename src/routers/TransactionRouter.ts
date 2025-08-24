@@ -7,9 +7,12 @@ import { depositValidator, paginationValidator, withdrawValidator } from "valida
 
 const TransactionRouter = Router()
 
+// User Transaction System
 TransactionRouter.post('/deposit', identifer, ValidatorErrorChecker(depositValidator), asyncResponseHandler(deposit))
 TransactionRouter.post('/withdraw', identifer, ValidatorErrorChecker(withdrawValidator), asyncResponseHandler(withdraw))
 TransactionRouter.get('/user-transactions', identifer, ValidatorErrorChecker(paginationValidator), asyncResponseHandler(getUserTransactions))
+
+// Crypto Current Price System
 TransactionRouter.get('/getCryptoRate', identifer, asyncResponseHandler(getCryptoToUSD_Rate))
 
 export default TransactionRouter

@@ -10,7 +10,7 @@ exports.depositValidator = joi_1.default.object({
     amount: joi_1.default.number().positive().required(),
     image: joi_1.default.string().uri().required(),
     description: joi_1.default.string().min(3).max(250).required(),
-    blockchain: joi_1.default.string().valid(Object.keys(utilities_constant_1.BLOCKCHAIN_NETWORKS_SYMBOLS)).required(),
+    blockchain: joi_1.default.string().valid(...Object.keys(utilities_constant_1.BLOCKCHAIN_NETWORKS_SYMBOLS)).required(),
 });
 exports.withdrawValidator = joi_1.default.object({
     amount: joi_1.default.number().positive().required(),
