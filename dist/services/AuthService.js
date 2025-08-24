@@ -45,7 +45,7 @@ class AuthServiceFunctions extends User_service_1.UserService {
             email: existingUser.email,
             verified: existingUser.verified
         });
-        return { success: true, message: 'User Logged In Successfully', data: { user: existingUser, token } };
+        return { success: true, message: 'User Logged In Successfully', data: { user: { ...existingUser.toObject(), password: undefined, __v: undefined }, token } };
     }
     async isVerified(email) {
         const existingUser = await this.getUserByEmail(email);

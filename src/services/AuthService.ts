@@ -44,7 +44,7 @@ export class AuthServiceFunctions extends UserService {
          email: existingUser.email,
          verified: existingUser.verified
       })
-      return { success: true, message: 'User Logged In Successfully', data: { user: existingUser, token } }
+      return { success: true, message: 'User Logged In Successfully', data: { user: { ...existingUser.toObject(), password: undefined, __v: undefined }, token } }
    }
 
    async isVerified(email: string) {
