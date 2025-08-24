@@ -8,7 +8,8 @@ const utilities_constant_1 = require("../constant/utilities.constant");
 const joi_1 = __importDefault(require("joi"));
 exports.depositValidator = joi_1.default.object({
     amount: joi_1.default.number().positive().required(),
-    image: joi_1.default.string().uri().required(),
+    // image: Joi.string().uri().required(),
+    image: joi_1.default.string().required(),
     description: joi_1.default.string().min(3).max(250).required(),
     blockchain: joi_1.default.string().valid(...Object.keys(utilities_constant_1.BLOCKCHAIN_NETWORKS_SYMBOLS)).required(),
 });

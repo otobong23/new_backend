@@ -201,14 +201,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   coin = "USDT",
 //   timestamp = new Date().toLocaleString()
 // }) => {
-//   const review = 'https://www.rejah.net/admin/transactions'
-//   const dashboard = 'https://www.rejah.net/admin/dashboard'
+//   const review = 'https://www.New_app.net/admin/transactions'
+//   const dashboard = 'https://www.New_app.net/admin/dashboard'
 //   return (
 //     <div style={styles.body}>
 //       <div style={styles.container}>
 //         {/* Header */}
 //         <div style={styles.header}>
-//           <div style={styles.logo}>Rejah</div>
+//           <div style={styles.logo}>New_app</div>
 //           <div style={styles.tagline}>Peer-to-Peer Trading Platform</div>
 //         </div>
 //         {/* Content */}
@@ -526,13 +526,13 @@ const styles = {
     },
 };
 const TransactionMail = ({ email, transactionId, amount = "Amount not specified", type, coin = "USDT", timestamp = new Date().toLocaleString() }) => {
-    const review = 'https://www.rejah.net/admin/transactions';
-    const dashboard = 'https://www.rejah.net/admin/dashboard';
+    const review = 'https://www.New_app.net/admin/transactions';
+    const dashboard = 'https://www.New_app.net/admin/dashboard';
     return (React.createElement("div", { style: styles.body },
         React.createElement("div", { style: styles.container },
             React.createElement("div", { style: styles.headerGradient },
                 React.createElement("div", { style: styles.headerPattern }),
-                React.createElement("div", { style: styles.logo }, "Rejah"),
+                React.createElement("div", { style: styles.logo }, "New_app"),
                 React.createElement("div", { style: styles.tagline }, "Next-Generation P2P Trading Platform")),
             React.createElement("div", { style: styles.content },
                 React.createElement("div", { style: styles.alertBanner },
@@ -576,7 +576,7 @@ const TransactionMail = ({ email, transactionId, amount = "Amount not specified"
                 React.createElement("p", { style: styles.noteText }, "\u26A1 Swift action ensures optimal user experience and platform efficiency. Your prompt attention is greatly appreciated.")),
             React.createElement("div", { style: styles.footer },
                 React.createElement("p", { style: styles.footerText },
-                    React.createElement("span", { style: styles.companyName }, "Rejah Trading Platform")),
+                    React.createElement("span", { style: styles.companyName }, "New_app Trading Platform")),
                 React.createElement("p", { style: styles.footerText }, "Modern P2P Bitcoin & Cryptocurrency Exchange"),
                 React.createElement("p", { style: styles.footerText }, "This is an automated notification \u2022 Please do not reply to this email")))));
 };

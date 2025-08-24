@@ -169,14 +169,14 @@
 //   coin = "USDT",
 //   timestamp = new Date().toLocaleString()
 // }) => {
-//   const review = 'https://www.rejah.net/admin/transactions'
-//   const dashboard = 'https://www.rejah.net/admin/dashboard'
+//   const review = 'https://www.New_app.net/admin/transactions'
+//   const dashboard = 'https://www.New_app.net/admin/dashboard'
 //   return (
 //     <div style={styles.body}>
 //       <div style={styles.container}>
 //         {/* Header */}
 //         <div style={styles.header}>
-//           <div style={styles.logo}>Rejah</div>
+//           <div style={styles.logo}>New_app</div>
 //           <div style={styles.tagline}>Peer-to-Peer Trading Platform</div>
 //         </div>
 
@@ -524,8 +524,8 @@ const TransactionMail: React.FC<EmailTemplateProps> = ({
   coin = "USDT",
   timestamp = new Date().toLocaleString()
 }) => {
-  const review = 'https://www.rejah.net/admin/transactions'
-  const dashboard = 'https://www.rejah.net/admin/dashboard'
+  const review = 'https://www.New_app.net/admin/transactions'
+  const dashboard = 'https://www.New_app.net/admin/dashboard'
   
   return (
     <div style={styles.body}>
@@ -533,7 +533,7 @@ const TransactionMail: React.FC<EmailTemplateProps> = ({
         {/* Header */}
         <div style={styles.headerGradient}>
           <div style={styles.headerPattern}></div>
-          <div style={styles.logo}>Rejah</div>
+          <div style={styles.logo}>New_app</div>
           <div style={styles.tagline}>Next-Generation P2P Trading Platform</div>
         </div>
 
@@ -606,7 +606,7 @@ const TransactionMail: React.FC<EmailTemplateProps> = ({
         {/* Footer */}
         <div style={styles.footer}>
           <p style={styles.footerText}>
-            <span style={styles.companyName}>Rejah Trading Platform</span>
+            <span style={styles.companyName}>New_app Trading Platform</span>
           </p>
           <p style={styles.footerText}>
             Modern P2P Bitcoin & Cryptocurrency Exchange
