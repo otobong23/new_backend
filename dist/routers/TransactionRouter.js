@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const TransactionController_1 = require("../controllers/TransactionController");
+const ErrorHandler_1 = require("../Errors/ErrorHandler");
+const express_1 = require("express");
+const identification_1 = require("../middlewares/identification");
+const TransactionValidator_1 = require("../validators/TransactionValidator");
+const TransactionRouter = (0, express_1.Router)();
+TransactionRouter.post('/deposit', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.depositValidator), (0, ErrorHandler_1.asyncResponseHandler)(TransactionController_1.deposit));
+TransactionRouter.post('/withdraw', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.withdrawValidator), (0, ErrorHandler_1.asyncResponseHandler)(TransactionController_1.withdraw));
+TransactionRouter.get('/user-transactions', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(TransactionController_1.getUserTransactions));
+TransactionRouter.get('/getCryptoRate', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(TransactionController_1.getCryptoToUSD_Rate));
+exports.default = TransactionRouter;
