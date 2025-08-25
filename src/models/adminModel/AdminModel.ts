@@ -4,7 +4,7 @@ import { IAdmin } from "./adminModel.types";
 
 const AdminSchema = new mongoose.Schema<IAdmin>({
    email: { type: String, require: [true, 'email field is required!'], lowercase: true, unique: true },
-   password: { type: String, require: [true, 'password is required!'], select: false, trim: true, default: 'admin123' },
+   password: { type: String, require: [true, 'password is required!'], select: false, trim: true },
    minDeposit: { type: Number, default: 10 },
    maxDeposit: { type: Number, default: 10 },
    minWithdrawal: { type: Number, default: 10 },

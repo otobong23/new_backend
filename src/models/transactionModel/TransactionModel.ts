@@ -9,7 +9,7 @@ const TransactionSchema: Schema<ITransaction> = new Schema({
    blockchain: { type: String, enum: Object.keys(BLOCKCHAIN_NETWORKS_SYMBOLS), required: true, default: 'USDT' },
    image: { type: String },
    walletAddress: { type: String },
-   type: { type: String, enum: ['deposit', 'withdrawal'], required: true },
+   type: { type: String, enum: ['deposit', 'withdraw'], required: true },
    status: { type: String, enum: ['pending', 'completed', 'failed'], required: true, default: 'pending' },
    description: { type: String, trim: true },
 }, {

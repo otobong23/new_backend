@@ -16,7 +16,8 @@ AdminRouter.get('/', (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.
 AdminRouter.get('/total-users', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getTotalUsers));
 AdminRouter.get('/all-users', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(TransactionValidator_1.paginationValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getAllUsers));
 AdminRouter.get('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.getUser));
-AdminRouter.patch('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.userValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateUser));
+AdminRouter.patch('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.userValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateUser));
+AdminRouter.patch('/all-users/user/balance', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AdminValidator_1.updateUserBlockchainBalanceValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.updateUserBlockchainBalance));
 AdminRouter.delete('/all-users/user', identification_1.identifer, (0, ErrorHandler_1.ValidatorErrorChecker)(AuthValidator_1.emailValidator), (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.deleteUser));
 AdminRouter.get('/all-users/search', identification_1.identifer, (0, ErrorHandler_1.asyncResponseHandler)(AdminController_1.searchUsers));
 // Transaction Routes

@@ -7,7 +7,7 @@ exports.getAdmin = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const AdminSchema = new mongoose_1.default.Schema({
     email: { type: String, require: [true, 'email field is required!'], lowercase: true, unique: true },
-    password: { type: String, require: [true, 'password is required!'], select: false, trim: true, default: 'admin123' },
+    password: { type: String, require: [true, 'password is required!'], select: false, trim: true },
     minDeposit: { type: Number, default: 10 },
     maxDeposit: { type: Number, default: 10 },
     minWithdrawal: { type: Number, default: 10 },

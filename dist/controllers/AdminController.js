@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchUsers = exports.deleteTransaction = exports.updateTransaction = exports.deleteUser = exports.updateUser = exports.getUserTransactions = exports.getAllTransactions = exports.getUser = exports.getAllUsers = exports.getTotalUsers = exports.getAdmin = exports.updateAdmin = exports.adminLogin = void 0;
+exports.searchUsers = exports.deleteTransaction = exports.updateTransaction = exports.deleteUser = exports.updateUserBlockchainBalance = exports.updateUser = exports.getUserTransactions = exports.getAllTransactions = exports.getUser = exports.getAllUsers = exports.getTotalUsers = exports.getAdmin = exports.updateAdmin = exports.adminLogin = void 0;
 const AdminService_1 = __importDefault(require("../services/AdminService"));
 const AdminValidator_1 = require("../validators/AdminValidator");
 const AuthValidator_1 = require("../validators/AuthValidator");
@@ -55,12 +55,18 @@ const getUserTransactions = async (req, res) => {
 };
 exports.getUserTransactions = getUserTransactions;
 const updateUser = async (req, res) => {
-    const { value: { email } } = AuthValidator_1.emailValidator.validate(req.query);
+    const { email } = req.query;
     const { value: newData } = AdminValidator_1.userValidator.validate(req.body);
     const response = await AdminService_1.default.updateUser(email, newData);
     res.status(200).json(response);
 };
 exports.updateUser = updateUser;
+const updateUserBlockchainBalance = async (req, res) => {
+    const { value: { email, blockchain, amount } } = AdminValidator_1.updateUserBlockchainBalanceValidator.validate(req.body);
+    const response = await AdminService_1.default.updateUserBlockchainBalance(email, blockchain, amount);
+    res.status(200).json(response);
+};
+exports.updateUserBlockchainBalance = updateUserBlockchainBalance;
 const deleteUser = async (req, res) => {
     const { value: { email } } = AuthValidator_1.emailValidator.validate(req.query);
     const response = await AdminService_1.default.deleteUser(email);

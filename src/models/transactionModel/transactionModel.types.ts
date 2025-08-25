@@ -7,7 +7,7 @@ export interface ITransaction {
    blockchain: BLOCKCHAIN_NETWORKS_TYPES
    image?: string
    walletAddress: string
-   type: 'deposit' | 'withdrawal'
+   type: 'deposit' | 'withdraw'
    status: TRANSACTION_STATUSES_TYPES
    description?: string
    createdAt: Date

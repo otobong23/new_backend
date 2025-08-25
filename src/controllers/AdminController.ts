@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AdminService from "services/AdminService";
-import { idValidator, updateAdminValidator, updateTransactionValidator, userValidator } from "validators/AdminValidator";
+import { idValidator, updateAdminValidator, updateTransactionValidator, updateUserBlockchainBalanceValidator, userValidator } from "validators/AdminValidator";
 import { emailValidator, loginValidator } from "validators/AuthValidator";
 import { paginationValidator } from "validators/TransactionValidator";
 
@@ -52,9 +52,15 @@ export const getUserTransactions = async (req: Request, res: Response) => {
 }
 
 export const updateUser = async (req: Request, res: Response) => {
-   const { value: { email } } = emailValidator.validate(req.query);
+   const { email } = req.query as { email: string }
    const { value: newData } = userValidator.validate(req.body);
    const response = await AdminService.updateUser(email, newData);
+   res.status(200).json(response);
+}
+
+export const updateUserBlockchainBalance = async (req: Request, res: Response) => {
+   const { value: { email, blockchain, amount } } = updateUserBlockchainBalanceValidator.validate(req.body);
+   const response = await AdminService.updateUserBlockchainBalance(email, blockchain, amount);
    res.status(200).json(response);
 }
 

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdminServiceFunctions = void 0;
+const utilities_constant_1 = require("../constant/utilities.constant");
 const dotenv_1 = __importDefault(require("dotenv"));
 const Errors_1 = require("../Errors/Errors");
 const defaultMailer_1 = require("../mailers/defaultMailer");
@@ -24,19 +25,18 @@ class AdminServiceFunctions extends User_service_1.UserService {
     }
     async login(email, password) {
         const USERNAME = process.env.EMAIL_USER;
-        let existingAdmin = await this.adminModel.findOne();
+        let existingAdmin = await this.adminModel.findOne({ email }).select('+password');
         if (!existingAdmin) {
             if (USERNAME === email) {
-                existingAdmin = new this.adminModel({ email });
+                existingAdmin = new this.adminModel({ email, password });
                 await existingAdmin.save();
             }
             else {
                 throw new Errors_1.ConflictError('Invalid credentials');
             }
         }
-        if (existingAdmin?.password !== password.trim() && existingAdmin.email !== email.trim()) {
+        if (existingAdmin.password !== password)
             throw new Errors_1.ConflictError('Invalid credentials');
-        }
         const token = this.jwtService.generateToken({
             adminId: existingAdmin?._id,
             email: existingAdmin?.email
@@ -129,6 +129,16 @@ class AdminServiceFunctions extends User_service_1.UserService {
             throw new Errors_1.NotFoundError('User does not exists!');
         return { message: "user's information updated successfully", success: true, data: { ...existingUser.toObject(), ...updateData, password: undefined, __v: undefined, _id: undefined } };
     }
+    async updateUserBlockchainBalance(email, blockchain, amount) {
+        const existingUser = await this.getUserByEmail(email);
+        if (!existingUser)
+            throw new Errors_1.NotFoundError('User not found');
+        if (!utilities_constant_1.BLOCKCHAIN_NETWORKS_SYMBOLS[blockchain])
+            throw new Errors_1.NotFoundError('Blockchain not supported');
+        existingUser.wallet.balances[blockchain] = amount;
+        await existingUser.save();
+        return { success: true, message: "User's blockchain balance updated successfully", data: existingUser.wallet.balances };
+    }
     async deleteUser(email) {
         const existingUser = await this.userModel.findOneAndDelete({ email });
         if (!existingUser)
@@ -136,6 +146,11 @@ class AdminServiceFunctions extends User_service_1.UserService {
         return { success: true, message: "user deleted successfully", data: { ...existingUser.toObject(), password: undefined, __v: undefined, _id: undefined } };
     }
     async updateTransaction(id, status, reason = '') {
+        const transaction = await this.transactionModel.findById(id);
+        if (!transaction)
+            throw new Errors_1.NotFoundError('Transaction not found');
+        if (transaction.status !== 'pending')
+            throw new Errors_1.BadRequestError('Transaction is not pending');
         const existingTransaction = await this.transactionModel.findByIdAndUpdate(id, { status }, { new: true });
         if (!existingTransaction)
             throw new Errors_1.NotFoundError('Transaction not found');
@@ -143,7 +158,7 @@ class AdminServiceFunctions extends User_service_1.UserService {
         if (existingTransaction.image)
             existingTransaction.image = undefined;
         if (existingTransaction.status === 'failed') {
-            if (existingTransaction.type === 'withdrawal')
+            if (existingTransaction.type === 'withdraw')
                 existingUser.wallet.balances[existingTransaction.blockchain] += existingTransaction.amount;
         }
         if (existingTransaction.status === 'completed') {

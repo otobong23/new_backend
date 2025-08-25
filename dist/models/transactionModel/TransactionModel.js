@@ -42,7 +42,7 @@ const TransactionSchema = new mongoose_1.Schema({
     blockchain: { type: String, enum: Object.keys(utilities_constant_1.BLOCKCHAIN_NETWORKS_SYMBOLS), required: true, default: 'USDT' },
     image: { type: String },
     walletAddress: { type: String },
-    type: { type: String, enum: ['deposit', 'withdrawal'], required: true },
+    type: { type: String, enum: ['deposit', 'withdraw'], required: true },
     status: { type: String, enum: ['pending', 'completed', 'failed'], required: true, default: 'pending' },
     description: { type: String, trim: true },
 }, {
