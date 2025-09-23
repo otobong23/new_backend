@@ -16,7 +16,6 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
-console.log(MONGO_URI);
 app.use((0, cors_1.default)({
     credentials: true,
     origin: ['http://localhost:3000']
@@ -34,6 +33,7 @@ app.get('/', (req, res) => {
 app.use('/api', routers_1.default);
 app.use(ErrorHandler_1.errorHandler);
 const server = http_1.default.createServer(app);
+console.log('prestart');
 mongoose_1.default.Promise = Promise;
 mongoose_1.default.connect(MONGO_URI, {
     connectTimeoutMS: 30000,
@@ -43,4 +43,8 @@ mongoose_1.default.connect(MONGO_URI, {
     server.listen(PORT, () => {
         console.log(`server listening from http://localhost:${PORT}/`);
     });
-}).catch(e => console.warn('connection error'));
+}).catch(e => {
+    console.error('connection error');
+    throw new Error('Failed to connect to the database');
+});
+console.log('post start; compiled');

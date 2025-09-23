@@ -3,7 +3,7 @@ import { BadRequestError, ConflictError, InternalServerError, NotFoundError, Una
 import hash from '../helpers/hashing'
 import sendResetMail from '../mailers/defaultMailer'
 import JWTService from '../middlewares/JWT.service'
-import { UserService } from 'middlewares/User.service'
+import { UserService } from '../middlewares/User.service'
 
 dotenv.config()
 

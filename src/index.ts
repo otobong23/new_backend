@@ -12,7 +12,6 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 4000
 const MONGO_URI: string = process.env.MONGO_URI!
-console.log(MONGO_URI)
 
 app.use(cors({
   credentials: true,
@@ -33,6 +32,7 @@ app.use('/api', AppRouter)
 app.use(errorHandler)
 
 const server = http.createServer(app)
+console.log('prestart')
 mongoose.Promise = Promise
 mongoose.connect(MONGO_URI, {
   connectTimeoutMS: 30000,
@@ -42,4 +42,8 @@ mongoose.connect(MONGO_URI, {
   server.listen(PORT, () => {
     console.log(`server listening from http://localhost:${PORT}/`)
   })
-}).catch(e => console.warn('connection error'))
+}).catch(e => {
+  console.error('connection error')
+  throw new Error('Failed to connect to the database')
+})
+console.log('post start; compiled')
